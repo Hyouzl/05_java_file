@@ -19,6 +19,7 @@ public class FileEx06_정답 {
 		
 		int[] vector = null;
 		int elementCnt = 0;
+		int[] data = new int[1000];
 		
 		String fileName = "vector.txt";
 		FileWriter fw = null;
@@ -40,13 +41,13 @@ public class FileEx06_정답 {
 			
 			if		(sel == 1) {		
 				System.out.println("[추가]데이터 입력 : ");
+				data[elementCnt] = scan.nextInt();
 				elementCnt++;
-				vector = new int[elementCnt];
-				vector[elementCnt - 1] = scan.nextInt();
 				
 				for (int i = 0; i < elementCnt; i++) {
-					System.out.println(vector[i] + " ");
+					System.out.print(data[i] + " ");
 				}
+				System.out.println();
 
 			}
 			else if (sel == 2) {
@@ -70,13 +71,19 @@ public class FileEx06_정답 {
 					}
 					
 				}
+				
+				for (int i = 0; i < elementCnt; i++) {
+					System.out.print(data[i] + " ");
+				}
+				System.out.println();
 			}
 			else if (sel == 3) {
 				try {
-					fw = new FileWriter(file);
+					fw = new FileWriter(fileName);
 					
-					
+					vector = new int[elementCnt];
 					for (int i = 0; i < elementCnt; i++) {
+						vector[i] = data[i];
 						fw.write(vector[i] + " ");
 					}
 					
@@ -86,28 +93,17 @@ public class FileEx06_정답 {
 				} finally {
 					try { fw.close(); } catch (IOException e) { e.printStackTrace(); }
 				}
-				
-				
-				
+			
 			}
 			else if (sel == 4) {
 				try {
 					fr = new FileReader(file);
 					br = new BufferedReader(fr);
 					
-					String data = br.readLine();
-				
+					String str = br.readLine();
 					
-					while (true) {
-						if (data == null) {
-							break;
-						}
-						
-						else {
-							System.out.print(data);
-						}
-					}
-				
+					System.out.println(str);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				} finally {

@@ -65,9 +65,10 @@ public class FileEx06_정답 {
 						elementCnt--;
 					}
 					else {
-					vector[index] = vector[index+1];
-					vector[elementCnt] = 0;
-					elementCnt--;
+						for (int i = index; i < elementCnt - 1; i++) {
+							vector[i] = vector[i+1];
+						}
+						elementCnt--;
 					}
 					
 				}

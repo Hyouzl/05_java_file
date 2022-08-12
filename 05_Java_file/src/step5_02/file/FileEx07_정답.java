@@ -192,6 +192,8 @@ public class FileEx07_정답 {
 						data += accs[i] + ":" + pws[i] + ":" + moneys[i] + "\n";
 					}
 					
+					data = data.substring(0, data.length()-1);
+					
 					fw.write(data);
 					
 				} catch (IOException e) {
@@ -201,23 +203,42 @@ public class FileEx07_정답 {
 				}
 			}
 			else if (sel == 10) {
+				
 				try {
 					fr = new FileReader(fileName);
 					br = new BufferedReader(fr);
 					
-					
+					String data ="";
+					String[] temp = null;
 					while (true) {
 						String line = br.readLine();
 						if (line == null) {
 							break;
 						}
 						else {
-							System.out.println(line);
+							data += line;
+							data += "\n";
 						}
+	
+						
+						data = data.substring(0, data.length()-1);
+						temp = data.split("\n");
+						accsCnt = temp.length;
+						
+						
+						for (int i = 0; i < accsCnt; i++) {
+							String[] Info = temp[i].split(":"); 
+							accs[i] = Info[0];
+							pws[i] = Info[1];
+							moneys[i] = Integer.parseInt(Info[2]);
+						}
+						
+						
 					}
+					
+					
  					
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} finally {
 					try { br.close(); } catch (IOException e) { e.printStackTrace(); }

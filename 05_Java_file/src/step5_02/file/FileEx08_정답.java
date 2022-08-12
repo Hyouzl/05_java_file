@@ -37,8 +37,39 @@ public class FileEx08_정답 {
 			System.out.print("메뉴 선택 : ");
 			int sel = scan.nextInt();
 			
-			if		(sel == 1) {}
-			else if (sel == 2) {}
+			if		(sel == 1) {
+				System.out.print("[로그인]ID 입력 : ");
+				String id = scan.next();
+				System.out.print("[로그인]PW 입력 : ");
+				String pw = scan.next();
+				
+				int cnt = 0;
+				for (int i = 0; i < ids.length; i++) {	
+					if (id.equals(ids[i]) && pw.equals(pws[i])) {
+						log = i;
+						System.out.println("[메세지]" + ids[i] + "님, 환영합니다.");
+						break;
+					}
+					cnt++;
+				}
+				
+				if (cnt == ids.length) {
+					System.out.println("ID 와 PW를 확인하세요.");
+				}
+				
+			}
+			else if (sel == 2) {
+				
+				for (int i = 0; i < items.length; i++) {
+					System.out.println(i+1 + "." + items[i]);
+				}
+				System.out.print("[쇼핑]상품번호를 선택하세요 : ");
+				int num = scan.nextInt();
+				
+				jang[log][num-1]++; 
+				
+		
+			}
 			else if (sel == 3) {}
 			else if (sel == 4) {}
 			else if (sel == 5) {}

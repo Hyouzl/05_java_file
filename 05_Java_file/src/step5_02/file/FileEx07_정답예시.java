@@ -225,6 +225,7 @@ public class FileEx07_정답예시 {
                     continue;
                 }
 
+                else {
                 String data = "";
                 for (int i = 0; i < accsCnt; i++) {
                     data += accs[i];
@@ -245,6 +246,7 @@ public class FileEx07_정답예시 {
                     e.printStackTrace();
                 } finally {
                     if (fw != null) {try {fw.close();} catch (IOException e) {}}
+                }
                 }
             }
             else if(sel == 10) {

@@ -1,6 +1,11 @@
 package step5_02.file;
 
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.Identity;
 import java.util.Scanner;
 
@@ -20,9 +25,30 @@ public class FileEx07_정답 {
 		String[]  pws = new String[size];
 		int[]  moneys = new int[size];
 		
+
+		FileReader fr = null;
+		BufferedReader br = null;
 		String fileName = "atm.txt";
 		
 		while(true) {
+			
+			System.out.println("--------------");
+			for (int i = 0; i < accsCnt; i++) {
+				System.out.println(accs[i] + ":" + pws[i] + ":" + moneys[i]);
+			}
+			
+			
+			if (identifier == -1) {
+				System.out.println("--------------");
+				System.out.println("상태 : 로그아웃");
+				System.out.println("--------------");
+			}
+			
+			else {
+			System.out.println("--------------");
+			System.out.println("상태 : " + accs[identifier] +"님, 로그인" );
+			System.out.println("--------------");
+			}
 			
 			
 			System.out.println("[MEGA ATM]");
@@ -55,12 +81,18 @@ public class FileEx07_정답 {
 			
 			
 			else if (sel == 2) {
+				if (identifier == -1) {
+					System.out.println("[메세지]로그인 후 이용가능");
+				}
+				else {
 				for (int i = identifier; i < accsCnt - 1; i++) {
 					accs[i] = accs[i+1];
 					pws[i] = pws[i+1];
 				}
 				accsCnt--;
+				identifier = -1;
 				System.out.println("[메세지]탈퇴되었습니다.");
+				}
 			}
 			
 			else if (sel == 3) {
@@ -142,30 +174,62 @@ public class FileEx07_정답 {
 					System.out.println(accs[identifier] + "님의 계좌잔액은 " + moneys[identifier] + "원 입니다.");
 				}
 			}
-			else if (sel == 9) {}
-			else if (sel == 10) {}
+			else if (sel == 9) {
+				
+				if (accsCnt == 0) {
+					System.out.println("[메세지]저장할 데이터가 없습니다.");
+					continue;
+				}
+			
+				else {
+				FileWriter fw = null;
+				try {
+					fw = new FileWriter(fileName);
+					
+					String data = null;
+					
+					for (int i = 0; i < accsCnt; i++) {
+						data += accs[i] + ":" + pws[i] + ":" + moneys[i] + "\n";
+					}
+					
+					fw.write(data);
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally { if (fw != null) {try { fw.close(); } catch (IOException e) { e.printStackTrace();}} }
+				
+				}
+			}
+			else if (sel == 10) {
+				try {
+					fr = new FileReader(fileName);
+					br = new BufferedReader(fr);
+					
+					
+					while (true) {
+						String line = br.readLine();
+						if (line == null) {
+							break;
+						}
+						else {
+							System.out.println(line);
+						}
+					}
+ 					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					try { br.close(); } catch (IOException e) { e.printStackTrace(); }
+					try { fr.close(); } catch (IOException e) { e.printStackTrace(); }
+				}
+				
+				
+			}
 			else if (sel == 0) {
 				break;
 			}
 			
-			
-			System.out.println("--------------");
-			for (int i = 0; i < accsCnt; i++) {
-				System.out.println(accs[i] + ":" + pws[i] + ":" + moneys[i]);
-			}
-			
-			
-			if (identifier == -1) {
-				System.out.println("--------------");
-				System.out.println("상태 : 로그아웃");
-				System.out.println("--------------");
-			}
-			
-			else {
-			System.out.println("--------------");
-			System.out.println("상태 : " + accs[identifier] +"님, 로그인" );
-			System.out.println("--------------");
-			}
 		}
 		
 	}

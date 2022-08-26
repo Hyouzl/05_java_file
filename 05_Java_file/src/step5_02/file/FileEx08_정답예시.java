@@ -168,14 +168,11 @@ public class FileEx08_정답예시 {
 			else if (sel == 6) {
 				
 				File file = new File(fileName);
+				FileReader fr = null;
+				BufferedReader br = null;
 				
 				if (file.exists()) {
-					
-					FileReader fr = null;
-					BufferedReader br = null;
-					
 					try {
-						
 						fr = new FileReader(file);
 						br = new BufferedReader(fr);
 

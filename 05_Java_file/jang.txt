@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 0/1
 0/2
+=======
+0/0
+0/0
+>>>>>>> branch 'master' of https://github.com/Hyouzl/05_java_file.git
